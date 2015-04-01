@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2014 MbientLab Inc. All rights reserved.
+    Author : Eric Tsai 
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mw_ble_info_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="6dp" >
+
+    <TextView
+        android:id="@+id/device_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:id="@+id/device_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/device_name" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/device_address"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="14dp"
+        android:layout_toLeftOf="@+id/rssi"
+        android:contentDescription="@string/text_rssi_visual"
+        android:src="@drawable/ic_rssi_level"
+        android:maxLevel="4"
+        android:minLevel="0" />
+
+    <TextView
+        android:id="@+id/rssi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center" />
+
+</RelativeLayout>
