@@ -55,7 +55,8 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
     private MetaWearBleService mwService= null;
     private CheckBox useZipCheckbox;
     private MetaWearController mwCtrllr;
-    private final string MW_MAC_ADDRESS= "EC:2C:09:81:22:AC";
+    private final String MW_MAC_ADDRESS= "F5:49:5E:07:04:D2";
+    private Accelerometer accelCtrllr;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -134,34 +135,55 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
 
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
+        Log.i("logdebug","service connected started");
         mwService= ((MetaWearBleService.LocalBinder) service).getService();
 
         final BluetoothManager btManager= (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-        final mwBoard = btManager.getAdapter().getRemoteDevice(MW_MAC_ADDRESS)
-        mwCtrllr= mwService.getMetaWearController(mwService);
+        final BluetoothDevice mwBoard = btManager.getAdapter().getRemoteDevice(MW_MAC_ADDRESS);
+        mwCtrllr= mwService.getMetaWearController(mwBoard);
+        mwCtrllr.setRetainState(false);
         ///< Register the callback, log message will appear when connected
         mwCtrllr.addDeviceCallback(dCallbacks);
 
 ///< Remove the callback, no feedback for when a ble connection is made
-        mwCtrllr.removeDeviceCallback(dCallbacks);
+        //mwCtrllr.removeDeviceCallback(dCallbacks);
         mwCtrllr.connect();
+        Log.i("logdebug","connecting..");
     }
 
     private MetaWearController.DeviceCallbacks dCallbacks= new MetaWearController.DeviceCallbacks() {
         @Override
         public void connected() {
-            Log.i("ExampleActivity", "A Bluetooth LE connection has been established!");
+            Log.i("logdebug", "A Bluetooth LE connection has been established!");
+            Toast.makeText(getApplicationContext(), R.string.toast_connected, Toast.LENGTH_SHORT).show();
+            accelCtrllr= ((Accelerometer) mwCtrllr.getModuleController(Module.ACCELEROMETER));
+            accelCtrllr.enableShakeDetection(Axis.X);
+            accelCtrllr.startComponents();
+
+            mwCtrllr.addModuleCallback(new Accelerometer.Callbacks() {
+                @Override
+                public void shakeDetected(MovementData moveData) {
+                    Toast.makeText(getApplicationContext(), "SHAKE!", Toast.LENGTH_SHORT).show();
+                    Log.i("logdebug", "Shake Detected!");
+
+                }
+            });
+
+
         }
 
         @Override
         public void disconnected() {
-            Log.i("ExampleActivity", "Lost the Bluetooth LE connection!");
+            Log.i("logdebug", "Lost the Bluetooth LE connection!");
         }
+
     };
 
     ///< Don't need this callback method but we must implement it
     @Override
-    public void onServiceDisconnected(ComponentName name) { }
+    public void onServiceDisconnected(ComponentName name) {
+        Log.i("logdebug", "service disconnected");
+    }
 
     private void launchLoggingActivity(int mode, boolean useZip) {
         Intent i = new Intent(LauncherActivity.this, LoggerActivity.class);
