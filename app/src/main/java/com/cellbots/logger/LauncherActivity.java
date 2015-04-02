@@ -47,6 +47,8 @@ import com.mbientlab.metawear.api.controller.MechanicalSwitch;
 
 import com.cellbots.logger.localServer.ServerControlActivity;
 
+import java.util.Locale;
+
 /**
  * A simple Activity for choosing which mode to launch the data logger in.
  * 
@@ -156,7 +158,8 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
                            Log.i("logdebug", "A Bluetooth LE connection has been established!");
                            Toast.makeText(getApplicationContext(), R.string.toast_connected, Toast.LENGTH_SHORT).show();
                            accelCtrllr= ((Accelerometer) mwCtrllr.getModuleController(Module.ACCELEROMETER));
-                           accelCtrllr.enableShakeDetection(Axis.X);
+
+                           Accelerometer.SamplingConfig config = accelCtrllr.enableXYZSampling().withFullScaleRange(Accelerometer.SamplingConfig.FullScaleRange.FSR_8G).withOutputDataRate(Accelerometer.SamplingConfig.OutputDataRate.ODR_50_HZ);
                            accelCtrllr.startComponents();
 
                        }
@@ -168,10 +171,10 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
 
         }).addModuleCallback(new Accelerometer.Callbacks() {
             @Override
-            public void shakeDetected(MovementData moveData) {
-                Toast.makeText(getApplicationContext(), "SHAKE!", Toast.LENGTH_SHORT).show();
-                Log.i("logdebug", "Shake Detected!");
-
+            public void receivedDataValue(short x, short y, short z) {
+                Log.i("logdebug", "received data value");
+                Log.i("logdebug", String.format(Locale.US, "(%.3f, %.3f, %.3f)",
+                        x / 1000.0, y / 1000.0, z / 1000.0));
             }
         });
 
