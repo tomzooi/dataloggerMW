@@ -27,6 +27,7 @@ import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -57,6 +58,7 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
     private MetaWearController mwCtrllr;
     private final String MW_MAC_ADDRESS= "F5:49:5E:07:04:D2";
     private Accelerometer accelCtrllr;
+    private LocalBroadcastManager broadcastManager= null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -138,6 +140,11 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
         Log.i("logdebug","service connected started");
         mwService= ((MetaWearBleService.LocalBinder) service).getService();
 
+        broadcastManager= LocalBroadcastManager.getInstance(mwService);
+        broadcastManager.registerReceiver(MetaWearBleService.getMetaWearBroadcastReceiver(),
+                MetaWearBleService.getMetaWearIntentFilter());
+        mwService.useLocalBroadcastManager(broadcastManager);
+
         final BluetoothManager btManager= (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         final BluetoothDevice mwBoard = btManager.getAdapter().getRemoteDevice(MW_MAC_ADDRESS);
         mwCtrllr= mwService.getMetaWearController(mwBoard);
@@ -152,16 +159,6 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
                            accelCtrllr.enableShakeDetection(Axis.X);
                            accelCtrllr.startComponents();
 
-                           mwCtrllr.addModuleCallback(new Accelerometer.Callbacks() {
-                               @Override
-                               public void shakeDetected(MovementData moveData) {
-                                   Toast.makeText(getApplicationContext(), "SHAKE!", Toast.LENGTH_SHORT).show();
-                                   Log.i("logdebug", "Shake Detected!");
-
-                               }
-                           });
-
-
                        }
 
                        @Override
@@ -169,6 +166,13 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
                            Log.i("logdebug", "Lost the Bluetooth LE connection!");
                        }
 
+        }).addModuleCallback(new Accelerometer.Callbacks() {
+            @Override
+            public void shakeDetected(MovementData moveData) {
+                Toast.makeText(getApplicationContext(), "SHAKE!", Toast.LENGTH_SHORT).show();
+                Log.i("logdebug", "Shake Detected!");
+
+            }
         });
 
         mwCtrllr.connect();
