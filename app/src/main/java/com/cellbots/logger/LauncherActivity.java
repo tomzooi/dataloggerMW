@@ -172,7 +172,7 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
         }).addModuleCallback(new Accelerometer.Callbacks() {
             @Override
             public void receivedDataValue(short x, short y, short z) {
-                Log.i("logdebug", "received data value");
+                //Log.i("logdebug", "received data value");
                 Log.i("logdebug", String.format(Locale.US, "(%.3f, %.3f, %.3f)",
                         x / 1000.0, y / 1000.0, z / 1000.0));
             }
