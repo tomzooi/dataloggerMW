@@ -143,41 +143,39 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
         mwCtrllr= mwService.getMetaWearController(mwBoard);
         mwCtrllr.setRetainState(false);
         ///< Register the callback, log message will appear when connected
-        mwCtrllr.addDeviceCallback(dCallbacks);
+        mwCtrllr.addDeviceCallback(new MetaWearController.DeviceCallbacks() {
+                       @Override
+                       public void connected() {
+                           Log.i("logdebug", "A Bluetooth LE connection has been established!");
+                           Toast.makeText(getApplicationContext(), R.string.toast_connected, Toast.LENGTH_SHORT).show();
+                           accelCtrllr= ((Accelerometer) mwCtrllr.getModuleController(Module.ACCELEROMETER));
+                           accelCtrllr.enableShakeDetection(Axis.X);
+                           accelCtrllr.startComponents();
 
-///< Remove the callback, no feedback for when a ble connection is made
-        //mwCtrllr.removeDeviceCallback(dCallbacks);
+                           mwCtrllr.addModuleCallback(new Accelerometer.Callbacks() {
+                               @Override
+                               public void shakeDetected(MovementData moveData) {
+                                   Toast.makeText(getApplicationContext(), "SHAKE!", Toast.LENGTH_SHORT).show();
+                                   Log.i("logdebug", "Shake Detected!");
+
+                               }
+                           });
+
+
+                       }
+
+                       @Override
+                       public void disconnected() {
+                           Log.i("logdebug", "Lost the Bluetooth LE connection!");
+                       }
+
+        });
+
         mwCtrllr.connect();
         Log.i("logdebug","connecting..");
     }
 
-    private MetaWearController.DeviceCallbacks dCallbacks= new MetaWearController.DeviceCallbacks() {
-        @Override
-        public void connected() {
-            Log.i("logdebug", "A Bluetooth LE connection has been established!");
-            Toast.makeText(getApplicationContext(), R.string.toast_connected, Toast.LENGTH_SHORT).show();
-            accelCtrllr= ((Accelerometer) mwCtrllr.getModuleController(Module.ACCELEROMETER));
-            accelCtrllr.enableShakeDetection(Axis.X);
-            accelCtrllr.startComponents();
 
-            mwCtrllr.addModuleCallback(new Accelerometer.Callbacks() {
-                @Override
-                public void shakeDetected(MovementData moveData) {
-                    Toast.makeText(getApplicationContext(), "SHAKE!", Toast.LENGTH_SHORT).show();
-                    Log.i("logdebug", "Shake Detected!");
-
-                }
-            });
-
-
-        }
-
-        @Override
-        public void disconnected() {
-            Log.i("logdebug", "Lost the Bluetooth LE connection!");
-        }
-
-    };
 
     ///< Don't need this callback method but we must implement it
     @Override
