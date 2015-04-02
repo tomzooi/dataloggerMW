@@ -78,11 +78,7 @@
     <CheckBox android:layout_width="fill_parent" android:layout_height="wrap_content"
       android:checked="true" android:id="@+id/useZip" android:text="Zip and split data into 50MB chunks."></CheckBox>
 
-      <Button
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/action_connect"
-          android:id="@+id/connectButton" />
+
 
   </LinearLayout>
 </RelativeLayout>

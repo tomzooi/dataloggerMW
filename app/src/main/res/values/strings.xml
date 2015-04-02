@@ -7,4 +7,8 @@
     <string name="label_scan">Scan</string>
     <string name="label_stop">Stop</string>
     <string name="label_ok">OK</string>
+    <string name="toast_connected">MW Connected</string>
+    <string name="toast_unconnected">MW Disonnected</string>
+    <string name="mwmac">F5:49:5E:07:04:D2</string>
+
 </resources>

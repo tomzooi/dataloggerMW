@@ -1,0 +1,10 @@
+- (D)locate menu button for device connection -> menu/bledevice.xml, id = ble_connect
+- (D) locate code for device connection popup -> nrftoolbox/scanner/(scannerfragment)
+- locate code where menu is instantiated and activity is called
+
+- (D) add connect button to datalogger with same scanner activity (use activity from sostrigger app)
+- add callback and connect to metawear
+- set up accelerometer settings for axis logging
+- start logging when record is pressed (copy gps manager stuff )
+	- log to file (csv)
+	

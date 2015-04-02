@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="metawear-1.6.21">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.mbientlab/metawear/1.6.21/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.mbientlab/metawear/1.6.21/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

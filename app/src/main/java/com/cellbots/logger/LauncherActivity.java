@@ -18,10 +18,15 @@ package com.cellbots.logger;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,7 +42,6 @@ import com.mbientlab.metawear.api.controller.Accelerometer;
 import com.mbientlab.metawear.api.controller.Accelerometer.Axis;
 import com.mbientlab.metawear.api.controller.Accelerometer.MovementData;
 import com.mbientlab.metawear.api.controller.MechanicalSwitch;
-import com.cellbots.logger.MWScannerFragment.ScannerCallback;
 //import com.cellbots.logger.SettingsFragment.SettingsState;
 
 import com.cellbots.logger.localServer.ServerControlActivity;
@@ -47,12 +51,18 @@ import com.cellbots.logger.localServer.ServerControlActivity;
  * 
  * @author clchen@google.com (Charles L. Chen)
  */
-public class LauncherActivity extends Activity implements ScannerCallback {
+public class LauncherActivity extends Activity  implements ServiceConnection {
+    private MetaWearBleService mwService= null;
     private CheckBox useZipCheckbox;
+    private MetaWearController mwCtrllr;
+    private final string MW_MAC_ADDRESS= "EC:2C:09:81:22:AC";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ///< Bind the MetaWear service when the activity is created
+        getApplicationContext().bindService(new Intent(this, MetaWearBleService.class),
+                this, Context.BIND_AUTO_CREATE);
         setContentView(R.layout.main);
 
         useZipCheckbox = (CheckBox) findViewById(R.id.useZip);
@@ -60,31 +70,23 @@ public class LauncherActivity extends Activity implements ScannerCallback {
         final Activity self = this;
         Button launchLocalServerButton = (Button) findViewById(R.id.launchLocalServer);
         launchLocalServerButton.setOnClickListener(new OnClickListener() {
-                @Override
+            @Override
             public void onClick(View v) {
                 Intent i = new Intent(LauncherActivity.this, ServerControlActivity.class);
                 startActivity(i);
                 finish();
             }
         });
-        //launch metawear connect activity
-        Button launchConnectButton = (Button) findViewById(R.id.connectButton);
-        launchConnectButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new MWScannerFragment().show(getFragmentManager(), "metawear_scanner_fragment");
-            }
-        });
         Button launchVideoFrontButton = (Button) findViewById(R.id.launchVideoFront);
         launchVideoFrontButton.setOnClickListener(new OnClickListener() {
-                @Override
+            @Override
             public void onClick(View v) {
                 launchLoggingActivity(LoggerActivity.MODE_VIDEO_FRONT, useZipCheckbox.isChecked());
             }
         });
         Button launchVideoBackButton = (Button) findViewById(R.id.launchVideoBack);
         launchVideoBackButton.setOnClickListener(new OnClickListener() {
-                @Override
+            @Override
             public void onClick(View v) {
                 launchLoggingActivity(LoggerActivity.MODE_VIDEO_BACK, useZipCheckbox.isChecked());
             }
@@ -92,7 +94,7 @@ public class LauncherActivity extends Activity implements ScannerCallback {
         final EditText pictureDelayEditText = (EditText) findViewById(R.id.pictureDelay);
         Button launchPictureButton = (Button) findViewById(R.id.launchPicture);
         launchPictureButton.setOnClickListener(new OnClickListener() {
-                @Override
+            @Override
             public void onClick(View v) {
                 Intent i = new Intent(self, LoggerActivity.class);
                 i.putExtra(LoggerActivity.EXTRA_MODE, LoggerActivity.MODE_PICTURES);
@@ -119,6 +121,47 @@ public class LauncherActivity extends Activity implements ScannerCallback {
             launchVideoFrontButton.setVisibility(View.GONE);
         }
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (mwService != null) {
+            ///< Don't forget to unregister the MetaWear receiver
+            mwService.unregisterReceiver(MetaWearBleService.getMetaWearBroadcastReceiver());
+        }
+        getApplicationContext().unbindService(this);
+    }
+
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        mwService= ((MetaWearBleService.LocalBinder) service).getService();
+
+        final BluetoothManager btManager= (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        final mwBoard = btManager.getAdapter().getRemoteDevice(MW_MAC_ADDRESS)
+        mwCtrllr= mwService.getMetaWearController(mwService);
+        ///< Register the callback, log message will appear when connected
+        mwCtrllr.addDeviceCallback(dCallbacks);
+
+///< Remove the callback, no feedback for when a ble connection is made
+        mwCtrllr.removeDeviceCallback(dCallbacks);
+        mwCtrllr.connect();
+    }
+
+    private MetaWearController.DeviceCallbacks dCallbacks= new MetaWearController.DeviceCallbacks() {
+        @Override
+        public void connected() {
+            Log.i("ExampleActivity", "A Bluetooth LE connection has been established!");
+        }
+
+        @Override
+        public void disconnected() {
+            Log.i("ExampleActivity", "Lost the Bluetooth LE connection!");
+        }
+    };
+
+    ///< Don't need this callback method but we must implement it
+    @Override
+    public void onServiceDisconnected(ComponentName name) { }
 
     private void launchLoggingActivity(int mode, boolean useZip) {
         Intent i = new Intent(LauncherActivity.this, LoggerActivity.class);
@@ -126,9 +169,5 @@ public class LauncherActivity extends Activity implements ScannerCallback {
         i.putExtra(LoggerActivity.EXTRA_USE_ZIP, useZip);
         startActivity(i);
         finish();
-    }
-    @Override
-    public void btDeviceSelected(BluetoothDevice device) {
-        Log.d("Debug:","device selected");
     }
 }

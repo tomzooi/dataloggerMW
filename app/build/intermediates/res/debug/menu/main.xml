@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.cellbots.logger.LauncherActivity" >
+
+    <item
+        android:id="@+id/action_connect"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/action_connect"/>
+</menu><!-- From: file:/home/tom/AndroidstudioProjects/dataLogger/app/src/main/res/menu/main.xml -->
