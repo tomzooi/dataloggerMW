@@ -19,4 +19,4 @@
       android:src="@drawable/diagnostics_button_up" android:paddingBottom="4dip"
       android:paddingRight="25dip" />
   </LinearLayout>
-</LinearLayout><!-- From: file:/home/tom/AndroidstudioProjects/dataLogger/app/src/main/res/layout/control_panel_data.xml -->
+</LinearLayout><!-- From: file:/storage/data/Tom/Documents/Studie/Create/vakken%201415/stage/ampc/PoC/android/dataloggerMW/app/src/main/res/layout/control_panel_data.xml -->

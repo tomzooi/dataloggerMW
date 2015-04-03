@@ -10,5 +10,8 @@
     <string name="toast_connected">MW Connected</string>
     <string name="toast_unconnected">MW Disonnected</string>
     <string name="mwmac">F5:49:5E:07:04:D2</string>
+    <string name="useMW">Use metawear</string>
+    <string name="connect">Connect</string>
+
 
 </resources>

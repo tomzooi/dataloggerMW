@@ -2,53 +2,53 @@
 <items version="2" >
 
     <item
-        jar="/home/tom/AndroidstudioProjects/dataLogger/app/libs/asmack-android-17-0.8.2.jar"
+        jar="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/libs/asmack-android-17-0.8.2.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="d7d32047d42794d1897118da1f9846e613c26635">
-        <dex dex="/home/tom/AndroidstudioProjects/dataLogger/app/build/intermediates/pre-dexed/debug/asmack-android-17-0.8.2-689bde205ec8327a1f9a417b5f76276ac3026361.jar" />
+        <dex dex="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/build/intermediates/pre-dexed/debug/asmack-android-17-0.8.2-1270765708671ec04fb56165779384f8e19a0402.jar" />
     </item>
     <item
-        jar="/home/tom/AndroidstudioProjects/dataLogger/app/build/intermediates/exploded-aar/com.jjoe64/graphview/4.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ae24ad61a573cd1faf8261f5ec6d8f0cb58ddaad">
-        <dex dex="/home/tom/AndroidstudioProjects/dataLogger/app/build/intermediates/pre-dexed/debug/classes-bde35f76cb5e91dec8c1beaf2d37e5179fee77b9.jar" />
-    </item>
-    <item
-        jar="/home/tom/AndroidstudioProjects/dataLogger/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jar="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/home/tom/AndroidstudioProjects/dataLogger/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-da0758d1a70b8dd4da2a874d75a1b68e4cd83abf.jar" />
+        <dex dex="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-86b5b91372e6336e6e1c0f551d0b18494ff1334e.jar" />
     </item>
     <item
-        jar="/home/tom/AndroidstudioProjects/dataLogger/app/build/intermediates/exploded-aar/com.mbientlab/metawear/1.6.21/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="0728d1aec2f2857afca0472fa05edb76f3e718b1">
-        <dex dex="/home/tom/AndroidstudioProjects/dataLogger/app/build/intermediates/pre-dexed/debug/classes-d3756d6e4f949b91d465704aab4f86b4aed9401e.jar" />
-    </item>
-    <item
-        jar="/home/tom/AndroidstudioProjects/dataLogger/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef">
-        <dex dex="/home/tom/AndroidstudioProjects/dataLogger/app/build/intermediates/pre-dexed/debug/classes-f91f9a4caf5944d489df163ebe08a58b8c08c080.jar" />
-    </item>
-    <item
-        jar="/storage/2/android-sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/home/tom/AndroidstudioProjects/dataLogger/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-542f13189c947e36967717786183a4caba4bec76.jar" />
-    </item>
-    <item
-        jar="/home/tom/AndroidstudioProjects/dataLogger/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jar="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/home/tom/AndroidstudioProjects/dataLogger/app/build/intermediates/pre-dexed/debug/classes-a9fe0abf654c89b39d057853818aa6ff0f00a9cc.jar" />
+        <dex dex="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/build/intermediates/pre-dexed/debug/classes-0f0934b9fda7e36534a3df7bb78efa4b68a3bea6.jar" />
+    </item>
+    <item
+        jar="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/build/intermediates/exploded-aar/com.mbientlab/metawear/1.6.21/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0728d1aec2f2857afca0472fa05edb76f3e718b1">
+        <dex dex="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/build/intermediates/pre-dexed/debug/classes-f30ac368718c0ccebdde5b651244380eea0be5f5.jar" />
+    </item>
+    <item
+        jar="/opt/android-sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-1cd1039154f1bb9cc0d4a9da3e8b7ec509fd8b06.jar" />
+    </item>
+    <item
+        jar="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/build/intermediates/exploded-aar/com.jjoe64/graphview/4.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ae24ad61a573cd1faf8261f5ec6d8f0cb58ddaad">
+        <dex dex="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/build/intermediates/pre-dexed/debug/classes-eb94da6fa37f3cea0556c025b63d7368bc42b767.jar" />
+    </item>
+    <item
+        jar="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/20.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef">
+        <dex dex="/storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/build/intermediates/pre-dexed/debug/classes-1877a46908ddc7080fb202059bf42a6294500806.jar" />
     </item>
 
 </items>

@@ -10,4 +10,4 @@
     <item android:maxLevel="3" android:drawable="@drawable/ic_action_network_cell_3" />
     <item android:maxLevel="4" android:drawable="@drawable/ic_action_network_cell_4" />
 </level-list>
-<!-- From: file:/home/tom/AndroidstudioProjects/dataLogger/app/src/main/res/drawable/ic_rssi_level.xml -->
+<!-- From: file:/storage/data/Tom/Documents/Studie/Create/vakken%201415/stage/ampc/PoC/android/dataloggerMW/app/src/main/res/drawable/ic_rssi_level.xml -->

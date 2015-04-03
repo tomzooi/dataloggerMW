@@ -17,23 +17,6 @@
       <TextView android:layout_width="wrap_content"
       android:layout_height="wrap_content" android:text=" " />
 
-      <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
-        android:text="Cellbots Data Logger" android:textSize="30dip"
-        android:gravity="center_horizontal" />
-
-      <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
-      android:text=" " android:textSize="1dip" android:background="#FFFFFFFF" />
-    <TextView android:layout_width="wrap_content"
-      android:layout_height="wrap_content" android:text=" " />
-    <Button android:id="@+id/launchLocalServer" android:layout_width="fill_parent"
-      android:layout_height="wrap_content" android:text="Local Server Controls" />
-    <TextView android:layout_width="wrap_content"
-      android:layout_height="wrap_content" android:text=" " />
-    <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
-      android:text=" " android:textSize="1dip" android:background="#FFFFFFFF" />
-    <TextView android:layout_width="wrap_content"
-      android:layout_height="wrap_content" android:text=" " />
-
 
     <TextView android:layout_width="wrap_content"
       android:layout_height="wrap_content" android:text="Record video"
@@ -76,12 +59,24 @@
     <TextView android:layout_width="wrap_content"
       android:layout_height="wrap_content" android:text=" " />
     <CheckBox android:layout_width="fill_parent" android:layout_height="wrap_content"
-      android:checked="true" android:id="@+id/useZip" android:text="Zip and split data into 50MB chunks."></CheckBox>
+      android:checked="false" android:id="@+id/useZip" android:text="Zip and split data into 50MB chunks."></CheckBox>
 
+      <CheckBox
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/useMW"
+          android:id="@+id/useMW" />
+
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/connect"
+          android:id="@+id/mwconnect"
+          android:layout_gravity="center_horizontal" />
 
 
   </LinearLayout>
 </RelativeLayout>
 
 
-<!-- From: file:/home/tom/AndroidstudioProjects/dataLogger/app/src/main/res/layout/main.xml -->
+<!-- From: file:/storage/data/Tom/Documents/Studie/Create/vakken%201415/stage/ampc/PoC/android/dataloggerMW/app/src/main/res/layout/main.xml -->

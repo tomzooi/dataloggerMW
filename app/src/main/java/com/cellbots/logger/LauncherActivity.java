@@ -54,7 +54,7 @@ import java.util.Locale;
  * 
  * @author clchen@google.com (Charles L. Chen)
  */
-public class LauncherActivity extends Activity  implements ServiceConnection {
+public class LauncherActivity extends Activity  implements ServiceConnection,MWScannerFragment.ScannerCallback {
     private MetaWearBleService mwService= null;
     private CheckBox useZipCheckbox;
     private MetaWearController mwCtrllr;
@@ -73,15 +73,6 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
         useZipCheckbox = (CheckBox) findViewById(R.id.useZip);
 
         final Activity self = this;
-        Button launchLocalServerButton = (Button) findViewById(R.id.launchLocalServer);
-        launchLocalServerButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(LauncherActivity.this, ServerControlActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
         Button launchVideoFrontButton = (Button) findViewById(R.id.launchVideoFront);
         launchVideoFrontButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -96,6 +87,15 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
                 launchLoggingActivity(LoggerActivity.MODE_VIDEO_BACK, useZipCheckbox.isChecked());
             }
         });
+
+        Button connectMW = (Button) findViewById(R.id.mwconnect);
+        connectMW.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MWScannerFragment().show(getFragmentManager(), "metawear_scanner_fragment");
+            }
+        });
+
         final EditText pictureDelayEditText = (EditText) findViewById(R.id.pictureDelay);
         Button launchPictureButton = (Button) findViewById(R.id.launchPicture);
         launchPictureButton.setOnClickListener(new OnClickListener() {
@@ -136,7 +136,43 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
         }
         getApplicationContext().unbindService(this);
     }
+    @Override
+    public void btDeviceSelected(BluetoothDevice mwBoard) {
+        //mainFragment.setBtDevice(device);
+        Log.i("debuglog", "device received");
+        mwCtrllr= mwService.getMetaWearController(mwBoard);
+        mwCtrllr.setRetainState(false);
+        ///< Register the callback, log message will appear when connected
+        mwCtrllr.addDeviceCallback(new MetaWearController.DeviceCallbacks() {
+            @Override
+            public void connected() {
+                Log.i("logdebug", "A selected Bluetooth LE connection has been established!");
+                Toast.makeText(getApplicationContext(), R.string.toast_connected, Toast.LENGTH_SHORT).show();
+                accelCtrllr= ((Accelerometer) mwCtrllr.getModuleController(Module.ACCELEROMETER));
 
+                Accelerometer.SamplingConfig config = accelCtrllr.enableXYZSampling().withFullScaleRange(Accelerometer.SamplingConfig.FullScaleRange.FSR_8G).withOutputDataRate(Accelerometer.SamplingConfig.OutputDataRate.ODR_50_HZ);
+                accelCtrllr.startComponents();
+
+            }
+
+            @Override
+            public void disconnected() {
+                Log.i("logdebug", "Lost the selected Bluetooth LE connection!");
+            }
+
+        }).addModuleCallback(new Accelerometer.Callbacks() {
+            @Override
+            public void receivedDataValue(short x, short y, short z) {
+                //Log.i("logdebug", "received data value");
+                if(((LoggerApplication) getApplication()).isrecording()) {
+                    Log.i("logdebug", String.format(Locale.US, "(%.3f, %.3f, %.3f)", x / 1000.0, y / 1000.0, z / 1000.0));
+                }
+            }
+        });
+
+        mwCtrllr.connect();
+        Log.i("logdebug","connecting..");
+    }
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
         Log.i("logdebug","service connected started");
@@ -146,6 +182,7 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
         broadcastManager.registerReceiver(MetaWearBleService.getMetaWearBroadcastReceiver(),
                 MetaWearBleService.getMetaWearIntentFilter());
         mwService.useLocalBroadcastManager(broadcastManager);
+
 
         final BluetoothManager btManager= (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         final BluetoothDevice mwBoard = btManager.getAdapter().getRemoteDevice(MW_MAC_ADDRESS);
@@ -159,8 +196,8 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
                            Toast.makeText(getApplicationContext(), R.string.toast_connected, Toast.LENGTH_SHORT).show();
                            accelCtrllr= ((Accelerometer) mwCtrllr.getModuleController(Module.ACCELEROMETER));
 
-                           Accelerometer.SamplingConfig config = accelCtrllr.enableXYZSampling().withFullScaleRange(Accelerometer.SamplingConfig.FullScaleRange.FSR_8G).withOutputDataRate(Accelerometer.SamplingConfig.OutputDataRate.ODR_50_HZ);
-                           accelCtrllr.startComponents();
+                           //Accelerometer.SamplingConfig config = accelCtrllr.enableXYZSampling().withFullScaleRange(Accelerometer.SamplingConfig.FullScaleRange.FSR_8G).withOutputDataRate(Accelerometer.SamplingConfig.OutputDataRate.ODR_50_HZ);
+                           //accelCtrllr.startComponents();
 
                        }
 
@@ -173,12 +210,11 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
             @Override
             public void receivedDataValue(short x, short y, short z) {
                 //Log.i("logdebug", "received data value");
-                Log.i("logdebug", String.format(Locale.US, "(%.3f, %.3f, %.3f)",
-                        x / 1000.0, y / 1000.0, z / 1000.0));
+                //Log.i("logdebug", String.format(Locale.US, "(%.3f, %.3f, %.3f)",x / 1000.0, y / 1000.0, z / 1000.0));
             }
         });
 
-        mwCtrllr.connect();
+        //mwCtrllr.connect();
         Log.i("logdebug","connecting..");
     }
 
@@ -195,6 +231,6 @@ public class LauncherActivity extends Activity  implements ServiceConnection {
         i.putExtra(LoggerActivity.EXTRA_MODE, mode);
         i.putExtra(LoggerActivity.EXTRA_USE_ZIP, useZip);
         startActivity(i);
-        finish();
+        //finish();
     }
 }

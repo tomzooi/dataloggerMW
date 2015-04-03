@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: /home/tom/AndroidstudioProjects/dataLogger/app/src/main/aidl/com/cellbots/logger/localServer/ILoggingService.aidl
+ * Original file: /storage/data/Tom/Documents/Studie/Create/vakken 1415/stage/ampc/PoC/android/dataloggerMW/app/src/main/aidl/com/cellbots/logger/localServer/ILoggingService.aidl
  */
 package com.cellbots.logger.localServer;
 // Declare the interface.

@@ -10,4 +10,4 @@
       android:layout_height="wrap_content" android:text="@string/start_rec_time"
       android:textStyle="bold" android:textColor="#FFFFFFFF" android:padding="5dip" />
   </LinearLayout>
-</LinearLayout><!-- From: file:/home/tom/AndroidstudioProjects/dataLogger/app/src/main/res/layout/rec_time.xml -->
+</LinearLayout><!-- From: file:/storage/data/Tom/Documents/Studie/Create/vakken%201415/stage/ampc/PoC/android/dataloggerMW/app/src/main/res/layout/rec_time.xml -->

@@ -426,7 +426,8 @@ public class LoggerActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        mIsRecording = false;
+        ((LoggerApplication) this.getApplication()).setrecording(false);
+        mIsRecording = ((LoggerApplication) this.getApplication()).isrecording();
 
         useZip = getIntent().getBooleanExtra(EXTRA_USE_ZIP, true);
 
@@ -481,7 +482,9 @@ public class LoggerActivity extends Activity {
                     if ((mode == MODE_VIDEO_FRONT) || (mode == MODE_VIDEO_BACK)) {
                         if (!mIsRecording) {
                             try {
-                                mIsRecording = true;
+                                //mIsRecording = true;
+                                ((LoggerApplication) getApplication()).setrecording(true);
+                                mIsRecording = ((LoggerApplication) getApplication()).isrecording();
                                 recordButton.setImageResource(R.drawable.rec_button_pressed);
                                 // initializes recording
                                 mCamcorderView.initializeRecording();
@@ -505,7 +508,9 @@ public class LoggerActivity extends Activity {
                     } else {
                         if (!mIsRecording) {
                             try {
-                                mIsRecording = true;
+                                //mIsRecording = true;
+                                ((LoggerApplication) getApplication()).setrecording(false);
+                                mIsRecording = ((LoggerApplication) getApplication()).isrecording();
                                 recordButton.setImageResource(R.drawable.rec_button_pressed);
                                 mCameraView.takePictures(mDelay);
                                 new Thread(updateRecTimeDisplay).start();

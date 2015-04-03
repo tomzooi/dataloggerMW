@@ -1,11 +1,11 @@
 - implement mw selector again (make new branch for this)
 	- make chekbox with "use metawear"
-	- pass use metawear option to loggeractivity
-		- make new mode in loggeractivity to receive this
-	- when logger activity starts, launch metawear selecter first
-		- connect to selected metawear
-			- toast when succesfull
-		- set up accelerometer for 50hz logging
-		- make callback to store data in file
-		- start accelerometer components when recording starts
-		- stop accelerometer components when recording stoppes
+	- make connect button that selects metawear
+	- pass metawear bluetoothdevice to loggeractivity
+	- oncreate activity
+		- register with service
+		- connect to metawear on callback
+		- setup accelerometer
+		- setup metawear log file in initsensorlogfiles
+		- write to metawear log file in callback
+		
