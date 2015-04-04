@@ -146,7 +146,7 @@
     <eat-comment/>
     <string name="action_connect">Connect</string>
     <string name="app_name">Smart Logger</string>
-    <string name="connect">Connect</string>
+    <string name="connect">Connect to MetaWear</string>
     <string name="label_ok">OK</string>
     <string name="label_scan">Scan</string>
     <string name="label_stop">Stop</string>

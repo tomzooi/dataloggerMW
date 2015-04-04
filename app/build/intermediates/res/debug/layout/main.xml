@@ -61,12 +61,6 @@
     <CheckBox android:layout_width="fill_parent" android:layout_height="wrap_content"
       android:checked="false" android:id="@+id/useZip" android:text="Zip and split data into 50MB chunks."></CheckBox>
 
-      <CheckBox
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/useMW"
-          android:id="@+id/useMW" />
-
       <Button
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"

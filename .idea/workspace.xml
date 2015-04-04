@@ -35,9 +35,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3a5919d-1071-4724-bdde-70c6ed854446" name="Default" comment="added metawear API">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LauncherActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LauncherActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LoggerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LoggerActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LoggerApplication.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LoggerApplication.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/cellbots/logger/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/cellbots/logger/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dataLogger.iws" />
@@ -74,8 +76,8 @@
       <file leaf-file-name="LauncherActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LauncherActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3030">
-              <caret line="144" column="23" selection-start-line="144" selection-start-column="23" selection-end-line="144" selection-end-column="23" />
+            <state vertical-scroll-proportion="-5.4444447" vertical-offset="1998" max-vertical-offset="3030">
+              <caret line="188" column="19" selection-start-line="188" selection-start-column="18" selection-end-line="188" selection-end-column="19" />
               <folding>
                 <element signature="e#2889#3100#0" expanded="true" />
                 <element signature="e#3089#3090#0" expanded="true" />
@@ -93,32 +95,32 @@
       <file leaf-file-name="LoggerActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LoggerActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2647059" vertical-offset="8013" max-vertical-offset="15975">
-              <caret line="599" column="50" selection-start-line="599" selection-start-column="50" selection-end-line="599" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.330855" vertical-offset="4216" max-vertical-offset="16305">
+              <caret line="303" column="34" selection-start-line="303" selection-start-column="20" selection-end-line="303" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6974#6998#0" expanded="true" />
-                <element signature="e#7639#7989#0" expanded="true" />
-                <element signature="e#7974#7975#0" expanded="true" />
-                <element signature="class#13104:14267" expanded="false" />
-                <element signature="e#15063#16620#0" expanded="true" />
-                <element signature="e#16601#16602#0" expanded="true" />
-                <element signature="e#16949#17240#0" expanded="true" />
-                <element signature="e#17225#17226#0" expanded="true" />
-                <element signature="e#20490#23452#0" expanded="true" />
-                <element signature="e#23441#23442#0" expanded="true" />
-                <element signature="e#23579#24065#0" expanded="true" />
-                <element signature="e#24054#24055#0" expanded="true" />
-                <element signature="e#24213#24748#0" expanded="true" />
-                <element signature="e#24737#24738#0" expanded="true" />
-                <element signature="e#27383#27902#0" expanded="true" />
-                <element signature="e#27891#27892#0" expanded="true" />
-                <element signature="e#27928#30212#0" expanded="true" />
-                <element signature="e#29640#30080#0" expanded="true" />
-                <element signature="e#30053#30054#0" expanded="true" />
-                <element signature="e#30201#30202#0" expanded="true" />
-                <element signature="e#42555#42578#0" expanded="true" />
-                <element signature="e#43324#43332#0" expanded="true" />
+                <element signature="e#7011#7035#0" expanded="true" />
+                <element signature="e#7676#8551#0" expanded="true" />
+                <element signature="e#8536#8537#0" expanded="true" />
+                <element signature="class#13666:14829" expanded="false" />
+                <element signature="e#15625#17182#0" expanded="true" />
+                <element signature="e#17163#17164#0" expanded="true" />
+                <element signature="e#17511#17802#0" expanded="true" />
+                <element signature="e#17787#17788#0" expanded="true" />
+                <element signature="e#21052#24014#0" expanded="true" />
+                <element signature="e#24003#24004#0" expanded="true" />
+                <element signature="e#24141#24627#0" expanded="true" />
+                <element signature="e#24616#24617#0" expanded="true" />
+                <element signature="e#24775#25310#0" expanded="true" />
+                <element signature="e#25299#25300#0" expanded="true" />
+                <element signature="e#28108#28627#0" expanded="true" />
+                <element signature="e#28616#28617#0" expanded="true" />
+                <element signature="e#28653#30937#0" expanded="true" />
+                <element signature="e#30365#30805#0" expanded="true" />
+                <element signature="e#30778#30779#0" expanded="true" />
+                <element signature="e#30926#30927#0" expanded="true" />
+                <element signature="e#43432#43455#0" expanded="true" />
+                <element signature="e#44201#44209#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -137,8 +139,8 @@
       <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="345">
-              <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+            <state vertical-scroll-proportion="-7.8" vertical-offset="0" max-vertical-offset="345">
+              <caret line="13" column="46" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -147,8 +149,8 @@
       <file leaf-file-name="main.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23076923" vertical-offset="306" max-vertical-offset="1305">
-              <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+            <state vertical-scroll-proportion="-7.269231" vertical-offset="756" max-vertical-offset="1215">
+              <caret line="63" column="6" selection-start-line="63" selection-start-column="6" selection-end-line="63" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -987,11 +989,11 @@
         <option value="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/MWscanner.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/MWScannerFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LoggerApplication.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LauncherActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LoggerActivity.java" />
       </list>
     </option>
@@ -1589,7 +1591,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296355" sideWeight="0.49924472" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1933439" sideWeight="0.73111784" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4675119" sideWeight="0.73111784" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1663,7 +1665,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LoggerActivity.java</url>
-          <line>258</line>
+          <line>269</line>
           <properties />
         </line-breakpoint>
       </breakpoints>
@@ -1702,28 +1704,28 @@
           <caret line="704" column="26" selection-start-line="704" selection-start-column="8" selection-end-line="704" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6974#6998#0" expanded="true" />
-            <element signature="e#7639#7989#0" expanded="true" />
-            <element signature="e#7974#7975#0" expanded="true" />
-            <element signature="class#13104:14267" expanded="false" />
-            <element signature="e#15063#16620#0" expanded="true" />
-            <element signature="e#16601#16602#0" expanded="true" />
-            <element signature="e#16949#17240#0" expanded="true" />
-            <element signature="e#17225#17226#0" expanded="true" />
-            <element signature="e#20490#23452#0" expanded="true" />
-            <element signature="e#23441#23442#0" expanded="true" />
-            <element signature="e#23579#24065#0" expanded="true" />
-            <element signature="e#24054#24055#0" expanded="true" />
-            <element signature="e#24213#24748#0" expanded="true" />
-            <element signature="e#24737#24738#0" expanded="true" />
-            <element signature="e#27383#27902#0" expanded="true" />
-            <element signature="e#27891#27892#0" expanded="true" />
-            <element signature="e#27928#30212#0" expanded="true" />
-            <element signature="e#29640#30080#0" expanded="true" />
-            <element signature="e#30053#30054#0" expanded="true" />
-            <element signature="e#30201#30202#0" expanded="true" />
-            <element signature="e#42555#42578#0" expanded="true" />
-            <element signature="e#43324#43332#0" expanded="true" />
+            <element signature="e#7011#7035#0" expanded="true" />
+            <element signature="e#7676#8551#0" expanded="true" />
+            <element signature="e#8536#8537#0" expanded="true" />
+            <element signature="class#13666:14829" expanded="false" />
+            <element signature="e#15625#17182#0" expanded="true" />
+            <element signature="e#17163#17164#0" expanded="true" />
+            <element signature="e#17511#17802#0" expanded="true" />
+            <element signature="e#17787#17788#0" expanded="true" />
+            <element signature="e#21052#24014#0" expanded="true" />
+            <element signature="e#24003#24004#0" expanded="true" />
+            <element signature="e#24141#24627#0" expanded="true" />
+            <element signature="e#24616#24617#0" expanded="true" />
+            <element signature="e#24775#25310#0" expanded="true" />
+            <element signature="e#25299#25300#0" expanded="true" />
+            <element signature="e#28108#28627#0" expanded="true" />
+            <element signature="e#28616#28617#0" expanded="true" />
+            <element signature="e#28653#30937#0" expanded="true" />
+            <element signature="e#30365#30805#0" expanded="true" />
+            <element signature="e#30778#30779#0" expanded="true" />
+            <element signature="e#30926#30927#0" expanded="true" />
+            <element signature="e#43432#43455#0" expanded="true" />
+            <element signature="e#44201#44209#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1802,28 +1804,28 @@
           <caret line="419" column="53" selection-start-line="419" selection-start-column="53" selection-end-line="419" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6974#6998#0" expanded="true" />
-            <element signature="e#7639#7989#0" expanded="true" />
-            <element signature="e#7974#7975#0" expanded="true" />
-            <element signature="class#13104:14267" expanded="false" />
-            <element signature="e#15063#16620#0" expanded="true" />
-            <element signature="e#16601#16602#0" expanded="true" />
-            <element signature="e#16949#17240#0" expanded="true" />
-            <element signature="e#17225#17226#0" expanded="true" />
-            <element signature="e#20490#23452#0" expanded="true" />
-            <element signature="e#23441#23442#0" expanded="true" />
-            <element signature="e#23579#24065#0" expanded="true" />
-            <element signature="e#24054#24055#0" expanded="true" />
-            <element signature="e#24213#24748#0" expanded="true" />
-            <element signature="e#24737#24738#0" expanded="true" />
-            <element signature="e#27383#27902#0" expanded="true" />
-            <element signature="e#27891#27892#0" expanded="true" />
-            <element signature="e#27928#30212#0" expanded="true" />
-            <element signature="e#29640#30080#0" expanded="true" />
-            <element signature="e#30053#30054#0" expanded="true" />
-            <element signature="e#30201#30202#0" expanded="true" />
-            <element signature="e#42555#42578#0" expanded="true" />
-            <element signature="e#43324#43332#0" expanded="true" />
+            <element signature="e#7011#7035#0" expanded="true" />
+            <element signature="e#7676#8551#0" expanded="true" />
+            <element signature="e#8536#8537#0" expanded="true" />
+            <element signature="class#13666:14829" expanded="false" />
+            <element signature="e#15625#17182#0" expanded="true" />
+            <element signature="e#17163#17164#0" expanded="true" />
+            <element signature="e#17511#17802#0" expanded="true" />
+            <element signature="e#17787#17788#0" expanded="true" />
+            <element signature="e#21052#24014#0" expanded="true" />
+            <element signature="e#24003#24004#0" expanded="true" />
+            <element signature="e#24141#24627#0" expanded="true" />
+            <element signature="e#24616#24617#0" expanded="true" />
+            <element signature="e#24775#25310#0" expanded="true" />
+            <element signature="e#25299#25300#0" expanded="true" />
+            <element signature="e#28108#28627#0" expanded="true" />
+            <element signature="e#28616#28617#0" expanded="true" />
+            <element signature="e#28653#30937#0" expanded="true" />
+            <element signature="e#30365#30805#0" expanded="true" />
+            <element signature="e#30778#30779#0" expanded="true" />
+            <element signature="e#30926#30927#0" expanded="true" />
+            <element signature="e#43432#43455#0" expanded="true" />
+            <element signature="e#44201#44209#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2092,14 +2094,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="345">
-          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///opt/android-sdk/sources/android-21/android/app/ActivityThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4835443" vertical-offset="51094" max-vertical-offset="75810">
@@ -2123,17 +2117,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23076923" vertical-offset="306" max-vertical-offset="1305">
-          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LoggerApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="479" max-vertical-offset="990">
@@ -2144,8 +2127,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LauncherActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1317" max-vertical-offset="3030">
-          <caret line="144" column="23" selection-start-line="144" selection-start-column="23" selection-end-line="144" selection-end-column="23" />
+        <state vertical-scroll-proportion="-5.4444447" vertical-offset="1998" max-vertical-offset="3030">
+          <caret line="188" column="19" selection-start-line="188" selection-start-column="18" selection-end-line="188" selection-end-column="19" />
           <folding>
             <element signature="e#2889#3100#0" expanded="true" />
             <element signature="e#3089#3090#0" expanded="true" />
@@ -2159,34 +2142,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.269231" vertical-offset="756" max-vertical-offset="1215">
+          <caret line="63" column="6" selection-start-line="63" selection-start-column="6" selection-end-line="63" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8" vertical-offset="0" max-vertical-offset="345">
+          <caret line="13" column="46" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/cellbots/logger/LoggerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2647059" vertical-offset="8013" max-vertical-offset="15975">
-          <caret line="599" column="50" selection-start-line="599" selection-start-column="50" selection-end-line="599" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.330855" vertical-offset="4216" max-vertical-offset="16305">
+          <caret line="303" column="34" selection-start-line="303" selection-start-column="20" selection-end-line="303" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6974#6998#0" expanded="true" />
-            <element signature="e#7639#7989#0" expanded="true" />
-            <element signature="e#7974#7975#0" expanded="true" />
-            <element signature="class#13104:14267" expanded="false" />
-            <element signature="e#15063#16620#0" expanded="true" />
-            <element signature="e#16601#16602#0" expanded="true" />
-            <element signature="e#16949#17240#0" expanded="true" />
-            <element signature="e#17225#17226#0" expanded="true" />
-            <element signature="e#20490#23452#0" expanded="true" />
-            <element signature="e#23441#23442#0" expanded="true" />
-            <element signature="e#23579#24065#0" expanded="true" />
-            <element signature="e#24054#24055#0" expanded="true" />
-            <element signature="e#24213#24748#0" expanded="true" />
-            <element signature="e#24737#24738#0" expanded="true" />
-            <element signature="e#27383#27902#0" expanded="true" />
-            <element signature="e#27891#27892#0" expanded="true" />
-            <element signature="e#27928#30212#0" expanded="true" />
-            <element signature="e#29640#30080#0" expanded="true" />
-            <element signature="e#30053#30054#0" expanded="true" />
-            <element signature="e#30201#30202#0" expanded="true" />
-            <element signature="e#42555#42578#0" expanded="true" />
-            <element signature="e#43324#43332#0" expanded="true" />
+            <element signature="e#7011#7035#0" expanded="true" />
+            <element signature="e#7676#8551#0" expanded="true" />
+            <element signature="e#8536#8537#0" expanded="true" />
+            <element signature="class#13666:14829" expanded="false" />
+            <element signature="e#15625#17182#0" expanded="true" />
+            <element signature="e#17163#17164#0" expanded="true" />
+            <element signature="e#17511#17802#0" expanded="true" />
+            <element signature="e#17787#17788#0" expanded="true" />
+            <element signature="e#21052#24014#0" expanded="true" />
+            <element signature="e#24003#24004#0" expanded="true" />
+            <element signature="e#24141#24627#0" expanded="true" />
+            <element signature="e#24616#24617#0" expanded="true" />
+            <element signature="e#24775#25310#0" expanded="true" />
+            <element signature="e#25299#25300#0" expanded="true" />
+            <element signature="e#28108#28627#0" expanded="true" />
+            <element signature="e#28616#28617#0" expanded="true" />
+            <element signature="e#28653#30937#0" expanded="true" />
+            <element signature="e#30365#30805#0" expanded="true" />
+            <element signature="e#30778#30779#0" expanded="true" />
+            <element signature="e#30926#30927#0" expanded="true" />
+            <element signature="e#43432#43455#0" expanded="true" />
+            <element signature="e#44201#44209#0" expanded="true" />
           </folding>
         </state>
       </provider>

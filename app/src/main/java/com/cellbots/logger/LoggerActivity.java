@@ -153,6 +153,7 @@ public class LoggerActivity extends Activity implements ServiceConnection {
     private BufferedWriter mGpsLocationWriter;
     private BufferedWriter mGpsStatusWriter;
     private BufferedWriter mGpsNmeaWriter;
+    private BufferedWriter mwWriter;
     private GpsManager mGpsManager;
     private WapManager mWapManager;
     private RemoteControl mRemoteControl;
@@ -206,6 +207,16 @@ public class LoggerActivity extends Activity implements ServiceConnection {
                 public void receivedDataValue(short x, short y, short z) {
                     //Log.i("logdebug", "received data value");
                     Log.i("logdebug", String.format(Locale.US, "(%.3f, %.3f, %.3f)",x / 1000.0, y / 1000.0, z / 1000.0));
+                    synchronized (mIsRecording) {
+                        if (mIsRecording) {
+                            Log.i("logdebug", "recording mw value...");
+                            try {
+                                mwWriter.write(System.currentTimeMillis() + "," + x / 1000.0 + "," + y / 1000.0 + "," + z / 1000.0 + "\n");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
                 }
             });
 
@@ -622,15 +633,21 @@ public class LoggerActivity extends Activity implements ServiceConnection {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        try {
+
             if (mwService != null) {
                 ///< Don't forget to unregister the MetaWear receiver
-                mwService.unregisterReceiver(MetaWearBleService.getMetaWearBroadcastReceiver());
+                //try {
+                    mwService.unregisterReceiver(MetaWearBleService.getMetaWearBroadcastReceiver());
+                /*}
+                catch(IOException e) {
+                    Log.e("oh crap", "IoEx", e);
+                }*/
             }
+        //try {
             getApplicationContext().unbindService(this);
-        } catch (IOException e) {
+       /* } catch (IOException e) {
             Log.e("Oh Crap!", "IoEx", e);
-        }
+        }*/
 
 
     }
@@ -798,6 +815,8 @@ public class LoggerActivity extends Activity implements ServiceConnection {
         mGpsLocationWriter = createBufferedWriter("/GpsLocation_", directoryName);
         mGpsStatusWriter = createBufferedWriter("/GpsStatus_", directoryName);
         mGpsNmeaWriter = createBufferedWriter("/GpsNmea_", directoryName);
+
+        mwWriter = createBufferedWriter("/MWacc_", directoryName);
 
         // Wifi is another special case
         mWifiWriter = createBufferedWriter("/Wifi_", directoryName);
@@ -994,6 +1013,9 @@ public class LoggerActivity extends Activity implements ServiceConnection {
             }
             if (mGpsLocationWriter != null) {
                 mGpsLocationWriter.close();
+            }
+            if (mwWriter != null) {
+                mwWriter.close();
             }
             if (mGpsStatusWriter != null) {
                 mGpsStatusWriter.close();
