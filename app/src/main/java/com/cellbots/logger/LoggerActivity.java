@@ -207,7 +207,7 @@ public class LoggerActivity extends Activity implements ServiceConnection {
                 public void receivedDataValue(short x, short y, short z) {
                     //Log.i("logdebug", "received data value");
                     Log.i("logdebug", String.format(Locale.US, "(%.3f, %.3f, %.3f)",x / 1000.0, y / 1000.0, z / 1000.0));
-                    synchronized (mIsRecording) {
+                   // synchronized (mIsRecording) {
                         if (mIsRecording) {
                             Log.i("logdebug", "recording mw value...");
                             try {
@@ -216,7 +216,7 @@ public class LoggerActivity extends Activity implements ServiceConnection {
                                 e.printStackTrace();
                             }
                         }
-                    }
+                   // }
                 }
             });
 
