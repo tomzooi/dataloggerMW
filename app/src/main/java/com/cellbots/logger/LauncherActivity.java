@@ -54,26 +54,27 @@ import java.util.Locale;
  * 
  * @author clchen@google.com (Charles L. Chen)
  */
-public class LauncherActivity extends Activity  implements ServiceConnection,MWScannerFragment.ScannerCallback {
-    private MetaWearBleService mwService= null;
+public class LauncherActivity extends Activity implements MWScannerFragment.ScannerCallback {
+    //private MetaWearBleService mwService= null;
     private CheckBox useZipCheckbox;
-    private MetaWearController mwCtrllr;
-    private final String MW_MAC_ADDRESS= "F5:49:5E:07:04:D2";
-    private Accelerometer accelCtrllr;
-    private LocalBroadcastManager broadcastManager= null;
+    //private MetaWearController mwCtrllr;
+   // private final String MW_MAC_ADDRESS= "F5:49:5E:07:04:D2";
+  //  private Accelerometer accelCtrllr;
+    //private LocalBroadcastManager broadcastManager= null;
+    private BluetoothDevice mwBLdevice = null;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ///< Bind the MetaWear service when the activity is created
-        getApplicationContext().bindService(new Intent(this, MetaWearBleService.class),
-                this, Context.BIND_AUTO_CREATE);
         setContentView(R.layout.main);
 
         useZipCheckbox = (CheckBox) findViewById(R.id.useZip);
 
         final Activity self = this;
-        Button launchVideoFrontButton = (Button) findViewById(R.id.launchVideoFront);
+        Button launchVideoFrontButton;
+        launchVideoFrontButton = (Button) findViewById(R.id.launchVideoFront);
         launchVideoFrontButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,6 +127,7 @@ public class LauncherActivity extends Activity  implements ServiceConnection,MWS
             launchVideoFrontButton.setVisibility(View.GONE);
         }
     }
+    /*
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -135,12 +137,14 @@ public class LauncherActivity extends Activity  implements ServiceConnection,MWS
             mwService.unregisterReceiver(MetaWearBleService.getMetaWearBroadcastReceiver());
         }
         getApplicationContext().unbindService(this);
-    }
+
+    }*/
     @Override
     public void btDeviceSelected(BluetoothDevice mwBoard) {
         //mainFragment.setBtDevice(device);
-        Log.i("debuglog", "device received");
-        mwCtrllr= mwService.getMetaWearController(mwBoard);
+        Log.i("logdebug", "device received");
+        mwBLdevice = mwBoard;
+       /* mwCtrllr= mwService.getMetaWearController(mwBoard);
         mwCtrllr.setRetainState(false);
         ///< Register the callback, log message will appear when connected
         mwCtrllr.addDeviceCallback(new MetaWearController.DeviceCallbacks() {
@@ -171,8 +175,9 @@ public class LauncherActivity extends Activity  implements ServiceConnection,MWS
         });
 
         mwCtrllr.connect();
-        Log.i("logdebug","connecting..");
+        Log.i("logdebug","connecting..");*/
     }
+    /*
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
         Log.i("logdebug","service connected started");
@@ -216,20 +221,21 @@ public class LauncherActivity extends Activity  implements ServiceConnection,MWS
 
         //mwCtrllr.connect();
         Log.i("logdebug","connecting..");
-    }
+    }*/
 
 
 
     ///< Don't need this callback method but we must implement it
-    @Override
+    /*@Override
     public void onServiceDisconnected(ComponentName name) {
         Log.i("logdebug", "service disconnected");
-    }
+    }*/
 
     private void launchLoggingActivity(int mode, boolean useZip) {
         Intent i = new Intent(LauncherActivity.this, LoggerActivity.class);
         i.putExtra(LoggerActivity.EXTRA_MODE, mode);
         i.putExtra(LoggerActivity.EXTRA_USE_ZIP, useZip);
+        i.putExtra("btdevice", mwBLdevice);
         startActivity(i);
         //finish();
     }

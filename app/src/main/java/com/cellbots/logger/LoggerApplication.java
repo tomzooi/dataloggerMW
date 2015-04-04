@@ -28,14 +28,6 @@ public class LoggerApplication extends Application {
      * A date value is used as a unique identifier for file paths.
      */
     private String filePathUniqueIdentifier;
-    private volatile Boolean mIsRecording = false;
-
-    public Boolean isrecording() {
-        return mIsRecording;
-    }
-    public void setrecording(Boolean isrec) {
-        mIsRecording = isrec;
-    }
 
     @Override
     public void onCreate() {

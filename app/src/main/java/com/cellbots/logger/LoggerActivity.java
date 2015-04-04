@@ -19,10 +19,14 @@ package com.cellbots.logger;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -32,8 +36,10 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.StatFs;
 import android.os.SystemClock;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -49,6 +55,10 @@ import android.widget.Toast;
 import com.cellbots.logger.GpsManager.GpsManagerListener;
 import com.cellbots.logger.RemoteControl.Command;
 import com.cellbots.logger.WapManager.ScanResults;
+import com.mbientlab.metawear.api.MetaWearBleService;
+import com.mbientlab.metawear.api.MetaWearController;
+import com.mbientlab.metawear.api.Module;
+import com.mbientlab.metawear.api.controller.Accelerometer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,6 +72,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.zip.Deflater;
 
 /**
@@ -72,135 +83,140 @@ import java.util.zip.Deflater;
  * @author clchen@google.com (Charles L. Chen)
  */
 
-public class LoggerActivity extends Activity {
+public class LoggerActivity extends Activity implements ServiceConnection {
     /*
      * Constants
      */
     public static final String TAG = "CELLBOTS LOGGER";
-
     public static final String EXTRA_MODE = "MODE";
-
     public static final String EXTRA_PICTURE_DELAY = "PICTURE_DELAY";
-
     public static final String EXTRA_USE_ZIP = "USE_ZIP";
-
     public static final int MODE_VIDEO_FRONT = 0;
-
     public static final int MODE_VIDEO_BACK = 1;
-
     public static final int MODE_PICTURES = 2;
-
     private static final int UI_BAR_MAX_TOP_PADDING = 275;
-
     private static final float TEMPERATURE_MAX = 500;
-
     // max file size. if this is set to zero, only 1 .zip file is created
     protected static final int MAX_OUTPUT_ZIP_CHUNK_SIZE = 50 * 1024 * 1024;
-
     private static final int PROGRESS_ID = 123122312;
 
     /*
      * App state
      */
     private volatile Boolean mIsRecording;
-
     private boolean useZip;
-
     private long startRecTime = 0;
-
     private Thread zipperThread;
-
     private long mDelay = 0;
-
     private LoggerApplication application;
 
     /*
      * UI Elements
      */
     private AbstractCamcorderPreview mCamcorderView;
-
     private CameraPreview mCameraView;
-
     private TextView mAccelXTextView;
-
     private TextView mAccelYTextView;
-
     private TextView mAccelZTextView;
-
     private TextView mGyroXTextView;
-
     private TextView mGyroYTextView;
-
     private TextView mGyroZTextView;
-
     private TextView mMagXTextView;
-
     private TextView mMagYTextView;
-
     private TextView mMagZTextView;
-
     private BarImageView mBatteryTempBarImageView;
-
     private TextView mBatteryTempTextView;
-
     private TextView mBatteryTempSpacerTextView;
-
     private LinearLayout mFlashingRecGroup;
-
     private TextView mRecTimeTextView;
-
     private BarImageView mStorageBarImageView;
-
     private TextView mStorageTextView;
-
     private TextView mStorageSpacerTextView;
-
     private SlidingDrawer mDiagnosticsDrawer;
-
     private SlidingDrawer mDataDrawer;
-
     private TextView mPictureCountView;
-
     private TextView mGpsLocationView;
 
     /*
      * Sensors
      */
     private List<Sensor> sensors;
-
     private SensorManager mSensorManager;
-
     private int mBatteryTemp = 0;
-
     private BufferedWriter mBatteryTempWriter;
-
     private BufferedWriter mBatteryLevelWriter;
-
     private BufferedWriter mBatteryVoltageWriter;
-
     private BufferedWriter mWifiWriter;
-
     private HashMap<String, BufferedWriter> sensorLogFileWriters;
-
     private StatFs mStatFs;
-
     private int mFreeSpacePct;
-
     private BufferedWriter mGpsLocationWriter;
-
     private BufferedWriter mGpsStatusWriter;
-
     private BufferedWriter mGpsNmeaWriter;
-
     private GpsManager mGpsManager;
-
     private WapManager mWapManager;
-
     private RemoteControl mRemoteControl;
 
+    //metawear fan:
+    private MetaWearController mwCtrllr;
+   // private final String MW_MAC_ADDRESS= "F5:49:5E:07:04:D2";
+    private Accelerometer accelCtrllr;
+    private LocalBroadcastManager broadcastManager= null;
+    private MetaWearBleService mwService= null;
+    private BluetoothDevice mwBLdevice = null;
     /*
      * Event handlers
      */
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        Log.i("logdebug","service connected started");
+        mwService= ((MetaWearBleService.LocalBinder) service).getService();
+
+        broadcastManager= LocalBroadcastManager.getInstance(mwService);
+        broadcastManager.registerReceiver(MetaWearBleService.getMetaWearBroadcastReceiver(),
+                MetaWearBleService.getMetaWearIntentFilter());
+        mwService.useLocalBroadcastManager(broadcastManager);
+
+        if(mwBLdevice == null) {
+            Log.i("logdebug","device is null!");
+        }
+        else {
+            mwCtrllr = mwService.getMetaWearController(mwBLdevice);
+            mwCtrllr.setRetainState(false);
+            ///< Register the callback, log message will appear when connected
+            mwCtrllr.addDeviceCallback(new MetaWearController.DeviceCallbacks() {
+                @Override
+                public void connected() {
+                    Log.i("logdebug", "A Bluetooth LE connection has been established!");
+                    Toast.makeText(getApplicationContext(), R.string.toast_connected, Toast.LENGTH_SHORT).show();
+                    accelCtrllr = ((Accelerometer) mwCtrllr.getModuleController(Module.ACCELEROMETER));
+
+                    Accelerometer.SamplingConfig config = accelCtrllr.enableXYZSampling().withFullScaleRange(Accelerometer.SamplingConfig.FullScaleRange.FSR_8G).withOutputDataRate(Accelerometer.SamplingConfig.OutputDataRate.ODR_50_HZ);
+                    accelCtrllr.startComponents();
+
+                }
+
+                @Override
+                public void disconnected() {
+                    Log.i("logdebug", "Lost the Bluetooth LE connection!");
+                }
+
+            }).addModuleCallback(new Accelerometer.Callbacks() {
+                @Override
+                public void receivedDataValue(short x, short y, short z) {
+                    //Log.i("logdebug", "received data value");
+                    Log.i("logdebug", String.format(Locale.US, "(%.3f, %.3f, %.3f)",x / 1000.0, y / 1000.0, z / 1000.0));
+                }
+            });
+
+            mwCtrllr.connect();
+            Log.i("logdebug", "connecting..");
+        }
+    }
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+        Log.i("logdebug", "service disconnected");
+    }
     private SensorEventListener mSensorEventListener = new SensorEventListener() {
             @Override
         public void onSensorChanged(SensorEvent event) {
@@ -419,17 +435,18 @@ public class LoggerActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getApplicationContext().bindService(new Intent(this, MetaWearBleService.class),this, Context.BIND_AUTO_CREATE);
         application = (LoggerApplication) getApplication();
 
         // Keep the screen on to make sure the phone stays awake.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        ((LoggerApplication) this.getApplication()).setrecording(false);
-        mIsRecording = ((LoggerApplication) this.getApplication()).isrecording();
+        mIsRecording = false;
+       // ((LoggerApplication) this.getApplication()).setrecording(false);
+       // mIsRecording = ((LoggerApplication) this.getApplication()).isrecording();
 
         useZip = getIntent().getBooleanExtra(EXTRA_USE_ZIP, true);
+        mwBLdevice = getIntent().getExtras().getParcelable("btdevice");
 
         final int mode = getIntent().getIntExtra(EXTRA_MODE, MODE_VIDEO_FRONT);
 
@@ -482,9 +499,9 @@ public class LoggerActivity extends Activity {
                     if ((mode == MODE_VIDEO_FRONT) || (mode == MODE_VIDEO_BACK)) {
                         if (!mIsRecording) {
                             try {
-                                //mIsRecording = true;
-                                ((LoggerApplication) getApplication()).setrecording(true);
-                                mIsRecording = ((LoggerApplication) getApplication()).isrecording();
+                                mIsRecording = true;
+                               // ((LoggerApplication) getApplication()).setrecording(true);
+                               // mIsRecording = ((LoggerApplication) getApplication()).isrecording();
                                 recordButton.setImageResource(R.drawable.rec_button_pressed);
                                 // initializes recording
                                 mCamcorderView.initializeRecording();
@@ -508,9 +525,9 @@ public class LoggerActivity extends Activity {
                     } else {
                         if (!mIsRecording) {
                             try {
-                                //mIsRecording = true;
-                                ((LoggerApplication) getApplication()).setrecording(false);
-                                mIsRecording = ((LoggerApplication) getApplication()).isrecording();
+                                mIsRecording = true;
+                               // ((LoggerApplication) getApplication()).setrecording(false);
+                               // mIsRecording = ((LoggerApplication) getApplication()).isrecording();
                                 recordButton.setImageResource(R.drawable.rec_button_pressed);
                                 mCameraView.takePictures(mDelay);
                                 new Thread(updateRecTimeDisplay).start();
@@ -602,7 +619,21 @@ public class LoggerActivity extends Activity {
 
         Log.i("LoggerActivity", "onPause finished.");
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        try {
+            if (mwService != null) {
+                ///< Don't forget to unregister the MetaWear receiver
+                mwService.unregisterReceiver(MetaWearBleService.getMetaWearBroadcastReceiver());
+            }
+            getApplicationContext().unbindService(this);
+        } catch (IOException e) {
+            Log.e("Oh Crap!", "IoEx", e);
+        }
 
+
+    }
     @Override
     protected Dialog onCreateDialog(int id) {
         if (id != PROGRESS_ID) {
